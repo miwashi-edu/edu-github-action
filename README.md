@@ -27,7 +27,7 @@ git add .
 git commit -m "Initial Commit"
 git push
 
-mkdir .github
+mkdir -p ./.github/workflows
 curl -L  https://gist.github.com/miwashiab/48373261199b6f4a9b661d8f5b231c44/raw/hello-world.yml -o ./.github/workflows/hello-world.yml
 
 git add .
