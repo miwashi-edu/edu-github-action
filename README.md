@@ -28,7 +28,7 @@ git commit -m "Initial Commit"
 git push
 
 mkdir .github
-curl -L  https://gist.github.com/miwashiab/48373261199b6f4a9b661d8f5b231c44/raw/hello-world.yml -o ./.github/hello-world.yml
+curl -L  https://gist.github.com/miwashiab/48373261199b6f4a9b661d8f5b231c44/raw/hello-world.yml -o ./.github/workflows/hello-world.yml
 
 git add .
 git commit -m "My first push with an action"
