@@ -47,6 +47,21 @@ jobs:
         run: echo "Hello World!"
 ```
 ## .github/ci-cd-pipeline.yml
+
+```bash
+cd ~
+cd ws
+git clone edu-github-action
+cd edu-github-action
+# brew install gh / choco install gh
+gh secret set DATABASE_URL
+gh secret set HEROKU_API_KEY
+gh secret set HEROKU_APP_NAME
+gh secret set HEROKU_EMAIL
+```
+
+
+## .github/ci-cd-pipeline.yml
 > Stulen, inte generaliserad ännu.
 ```yml
 name: CI CD Pipeline
