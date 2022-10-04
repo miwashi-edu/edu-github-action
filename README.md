@@ -46,4 +46,60 @@ jobs:
       - name: any-step
         run: echo "Hello World!"
 ```
+## .github/ci-cd-pipeline.yml
+> Stulen, inte generaliserad ännu.
+```yml
+name: CI CD Pipeline
+on: 
+  push:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        mongodb-version: ['4.2', '4.4', '5.0', '6.0']
+    
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v3
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Start MongoDB
+        uses: supercharge/mongodb-github-action@1.8.0
+        with:
+          mongodb-version: ${{ matrix.mongodb-version }}
+          mongodb-db: ${{secrets.DATABASE_URL}}          
+ 
+
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Compile project
+        run: npm run build --if-present
+      
+      - name: Run Tests
+        run: npm test
+        env:
+          DATABASE_URL: ${{secrets.DATABASE_URL}}
+          CI: true
+
+
+  deploy:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: akhileshns/heroku-deploy@v3.12.12 
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} 
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+```
 
