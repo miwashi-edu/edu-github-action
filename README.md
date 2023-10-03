@@ -9,9 +9,8 @@ git clone github-action
 cd github-action
 npm init -y
 mkdir __tests__
-curl -L https://gist.github.com/miwashiab/7ea5be9d7a645f197440f5746fd340bc/raw/unit-test.js -o ./__tests__/unit-test.js
-curl -L  https://gist.github.com/miwashiab/642d5f51c7c93e6793356ad666f6be03/raw/server.js -o server.js
-curl -L https://gist.github.com/miwashiab/3378fc2e4ab5d2691fa5978822721796/raw/.gitignore -o .gitignore
+curl -L https://gist.github.com/miwashi/7ea5be9d7a645f197440f5746fd340bc/raw/unit-test.js -o ./__tests__/unit-test.js
+curl -L  https://gist.github.com/miwashi/642d5f51c7c93e6793356ad666f6be03/raw/server.js -o server.js
 
 npm pkg set main="server.js"
 npm pkg set description="Simple application to test commit hooks"
