@@ -5,9 +5,8 @@
 ```bash
 cd ~
 cd ws
-git clone edu-github-action
-cd edu-github-action
-git init
+git clone github-action
+cd github-action
 npm init -y
 mkdir __tests__
 curl -L https://gist.github.com/miwashiab/7ea5be9d7a645f197440f5746fd340bc/raw/unit-test.js -o ./__tests__/unit-test.js
