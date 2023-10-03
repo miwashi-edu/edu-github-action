@@ -45,75 +45,12 @@ jobs:
       - name: any-step
         run: echo "Hello World!"
 ```
-## .github/ci-cd-pipeline.yml
 
-```bash
-cd ~
-cd ws
-git clone edu-github-action
-cd edu-github-action
-# brew install gh / choco install gh
-gh secret set DATABASE_URL
-gh secret set HEROKU_API_KEY
-gh secret set HEROKU_APP_NAME
-gh secret set HEROKU_EMAIL
-```
+## Tutorials
 
-
-## .github/ci-cd-pipeline.yml
-> Stulen, inte generaliserad ännu.
-```yml
-name: CI CD Pipeline
-on: 
-  push:
-    branches: [ "main" ]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x, 18.x]
-        mongodb-version: ['4.2', '4.4', '5.0', '6.0']
-    
-    steps:
-      - name: Git checkout
-        uses: actions/checkout@v3
-      
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Start MongoDB
-        uses: supercharge/mongodb-github-action@1.8.0
-        with:
-          mongodb-version: ${{ matrix.mongodb-version }}
-          mongodb-db: ${{secrets.DATABASE_URL}}          
- 
-
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Compile project
-        run: npm run build --if-present
-      
-      - name: Run Tests
-        run: npm test
-        env:
-          DATABASE_URL: ${{secrets.DATABASE_URL}}
-          CI: true
-
-
-  deploy:
-    needs: [test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: akhileshns/heroku-deploy@v3.12.12 
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ${{secrets.HEROKU_APP_NAME}} 
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-```
+[Discord](https://www.youtube.com/watch?v=-KDQqWNK3Tw)  
+[Hosting](https://www.youtube.com/watch?v=Bnd4IO3f2hU&t)  
+[Functions](https://davelms.medium.com/deploy-firebase-functions-using-github-actions-7dbafbd4df77)  
+[Test](https://www.youtube.com/watch?v=WW6ZUw9IExA)  
+[Release](https://www.youtube.com/watch?v=sVl6De94evo)
 
