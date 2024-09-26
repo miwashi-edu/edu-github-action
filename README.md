@@ -1,6 +1,8 @@
 # edu-github-action
 
-> I denna del vill vi använda github och däför är det bra om du börjar med att skapa ett repo på github, sedan clonar det till ditt workspace.
+> The first script is for setting up a backend server with Node and Express
+> It can be used to add actions to run unit tests or integration tests.
+> 
 
 ```bash
 cd ~
