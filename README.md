@@ -82,6 +82,7 @@ jobs:
 
 ### Step 1: Install nodejs in our virtual machine.
 
+> We need to have node installed on the virtual machine for **npm run build**, and **npm publish**
 ```yml
       - name: Setup Node.js
         uses: actions/setup-node@v3
