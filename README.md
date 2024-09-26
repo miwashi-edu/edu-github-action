@@ -80,8 +80,6 @@ jobs:
         with:
           node-version: '18'
           registry-url: 'https://registry.npmjs.org/'
-          # Enables Yarn/npm to read from .npmrc file
-          # scope: '@your-scope' # Replace with your package's scope if it's scoped
 ```
 
 ## Step 2: Use EndBug/version-check@v2 action
