@@ -47,7 +47,15 @@ jobs:
         run: echo "Hello World!"
 ```
 
-## On Push of package.json
+## Create an action to build and publish a component library on:
+
+```bash
+npm version patch/minor/major
+npm push
+```
+
+
+### On Push of package.json
 
 > We guard package.json and check when it is updated. If updated our action fires.
 
@@ -60,7 +68,7 @@ on:
       - 'package.json'
 ```
 
-## Get a virtual machine and start a job
+### Get a virtual machine and start a job
 
 ```yml
 jobs:
@@ -72,7 +80,7 @@ jobs:
           fetch-depth: 0 # Important for the next step to have the complete git history
 ```
 
-## Step 1: Install nodejs in our virtual machine.
+### Step 1: Install nodejs in our virtual machine.
 
 ```yml
       - name: Setup Node.js
@@ -82,7 +90,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org/'
 ```
 
-## Step 2: Use EndBug/version-check@v2 action
+### Step 2: Use EndBug/version-check@v2 action
 
 > This action checks the version of package.json to see if it has changed.
 
@@ -95,7 +103,7 @@ jobs:
           diff-search: true # Search for changes in the last commit
 ```
 
-## Step 3:  Run npm install
+### Step 3:  Run npm install
 
 > Just like if we would to it ourself, to do **npm run build** we need first to run **npm install**
 
@@ -104,7 +112,7 @@ jobs:
         run: npm install
 ```
 
-## Step 4:  Build it
+### Step 4:  Build it
 
 > Run **npm run build** to get the component into ./dist
 
@@ -113,7 +121,7 @@ jobs:
         run: npm run build
 ```
 
-## Step 4:  Publish it
+### Step 4:  Publish it to npmjs
 
 > We need to go to npmjs.com and generate a TOKEN, then add that token as NPM_TOKEN to github secrets.
 
@@ -125,12 +133,13 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
-## Step 5: Notify Team:
+### Step 5: Notify Team:
 
 > Here you add a step that notifies via mail, discord, slack or other.
 > Example is slack and uses a webhook stored in github secrets as SLACK_WEBHOOK_URL_COMPONENTS.
 > This: SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_COMPONENTS }} allows me to have many webhook urls and use same script just
 > change the secret assigned to SLACK_WEBHOOK_URL.
+> In the exeample CURL (command line url) is used to POST json data to the webhook.
 
 ```yml
       - name: Notify Slack
@@ -143,8 +152,3 @@ jobs:
           MESSAGE="Version $VERSION of $LIBRARY_NAME now published to npmjs."
           curl -X POST -H 'Content-type: application/json' --data "{\"text\":\"${MESSAGE}\"}" $SLACK_WEBHOOK_URL
 ```
-
-
-
-
-
